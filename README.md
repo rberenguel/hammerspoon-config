@@ -9,4 +9,4 @@ To mimic more or less my Amethyst usage, I borrowed the window management from [
 - A coloured overlay of the active zones on the top and what space the window will take will show.
 - If you release the window "to the top active zone left" it will resize it to 4/16ths on the left, likewise on the right and if done in the middle area, to 8/16ths. 
 
-GIF below
+https://user-images.githubusercontent.com/2410938/129484911-0719123e-34e5-4c49-ad1c-a536072b104f.mp4
