@@ -38,16 +38,17 @@ dragEvent = hs.eventtap.new({ hs.eventtap.event.types.leftMouseUp }, function(e)
 	print("And it moves")
     local dx = e:getProperty(hs.eventtap.event.properties.mouseEventDeltaX)
     local dy = e:getProperty(hs.eventtap.event.properties.mouseEventDeltaY)
-	local mousePos = hs.geometry.new(hs.mouse.absolutePosition())
+	local mousePos = hs.geometry.new(hs.mouse.getRelativePosition())
 	local leftClick = hs.mouse.getButtons()["left"]
 	local x  = mousePos.x
 	local y = mousePos.y
 	local leftMediumCellX = leftMediumCell['w']
-	local rightMediumCellX = rightMediumCell['x']
-
+	local rightMediumCellX = rightMediumCell['w'] * 3
+	print(leftMediumCellX)
+	print(rightMediumCellX)
 	
 	local destination = nil
-
+	print(x, " ", y)
 	if y < ACTIVE_AREA and x > leftMediumCellX and x < rightMediumCellX then
 		print("Resize now centre")
 		destination = wm.screenPositions.mediumCentre
