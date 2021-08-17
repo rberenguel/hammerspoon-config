@@ -12,4 +12,5 @@ To mimic more or less my Amethyst usage, I borrowed the window management from [
 - The center converts the window in a 8/16ths of the screen pane in the center
 - The center "target" maximises the window
 
+![](snappy.png)
 
