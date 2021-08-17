@@ -19,17 +19,33 @@ end
 draggingWin = nil
 draggingMode = 1
 
-local ACTIVE_AREA = 100
+local ACTIVE_AREA = 200
 
-local leftMediumCell = hs.grid.getCell(wm.screenPositions.mediumSideLeft, hs.screen.find('LG'))
-local rightMediumCell = hs.grid.getCell(wm.screenPositions.mediumSideRight, hs.screen.find('LG'))
-local centreMediumCell = hs.grid.getCell(wm.screenPositions.mediumCentre, hs.screen.find('LG'))
-local leftMediumCellTop = hs.grid.getCell(wm.screenPositions.mediumSideLeft, hs.screen.find('LG'))
+local leftMediumCell = hs.grid.getCell(wm.screenPositions.mediumSideLeft, myScreen)
+leftMediumCell['x'] = ACTIVE_AREA
+leftMediumCell['w'] = leftMediumCell['w'] - ACTIVE_AREA
+local rightMediumCell = hs.grid.getCell(wm.screenPositions.mediumSideRight, myScreen)
+rightMediumCell['w'] = rightMediumCell['w'] - ACTIVE_AREA
+
+local centreMediumCell = hs.grid.getCell(wm.screenPositions.mediumCentre, myScreen)
+
+local leftMediumCellTop = hs.grid.getCell(wm.screenPositions.mediumSideLeft, myScreen)
 leftMediumCellTop['h'] = ACTIVE_AREA
-local rightMediumCellTop = hs.grid.getCell(wm.screenPositions.mediumSideRight, hs.screen.find('LG'))
+leftMediumCellTop['x'] = ACTIVE_AREA
+leftMediumCellTop['w'] = leftMediumCellTop['w'] - ACTIVE_AREA
+local rightMediumCellTop = hs.grid.getCell(wm.screenPositions.mediumSideRight, myScreen)
 rightMediumCellTop['h'] = ACTIVE_AREA
-local centreMediumCellTop = hs.grid.getCell(wm.screenPositions.mediumCentre, hs.screen.find('LG'))
+rightMediumCellTop['w'] = rightMediumCellTop['w'] - ACTIVE_AREA
+local centreMediumCellTop = hs.grid.getCell(wm.screenPositions.mediumCentre, myScreen)
 centreMediumCellTop['h'] = ACTIVE_AREA
+
+local halfLeftCell = hs.grid.getCell(wm.screenPositions.halfLeft, myScreen)
+halfLeftCell['w'] = ACTIVE_AREA
+local halfRightCell = hs.grid.getCell(wm.screenPositions.halfRight, myScreen)
+halfRightCell['x'] = rightMediumCell['x'] + rightMediumCell['w']
+halfRightCell['w'] = ACTIVE_AREA
+
+
 
 dragEvent = hs.eventtap.new({ hs.eventtap.event.types.leftMouseUp }, function(e)
   print("Monitoring drag")
@@ -42,24 +58,33 @@ dragEvent = hs.eventtap.new({ hs.eventtap.event.types.leftMouseUp }, function(e)
 	local leftClick = hs.mouse.getButtons()["left"]
 	local x  = mousePos.x
 	local y = mousePos.y
-	local leftMediumCellX = leftMediumCell['w']
-	local rightMediumCellX = rightMediumCell['w'] * 3
+	local leftMediumCellX = leftMediumCell['x'] + leftMediumCell['w']
+	local rightMediumCellX = rightMediumCell['x']
+	local rightMediumCellXW = rightMediumCellX + rightMediumCell['w']
 	print(leftMediumCellX)
 	print(rightMediumCellX)
 	
 	local destination = nil
 	print(x, " ", y)
-	if y < ACTIVE_AREA and x > leftMediumCellX and x < rightMediumCellX then
+	if x > leftMediumCellX and x < rightMediumCellX then
 		print("Resize now centre")
 		destination = wm.screenPositions.mediumCentre
 	end
-	if y < ACTIVE_AREA and x < leftMediumCellX then
+	if x < leftMediumCellX and x > ACTIVE_AREA then
 		print("Resize now left")
 		destination = wm.screenPositions.mediumSideLeft
 	end
-	if y < ACTIVE_AREA and x > rightMediumCellX then
+	if x > rightMediumCellX and x < rightMediumCellXW then
 		print("Resize now right")
 		destination = wm.screenPositions.mediumSideRight
+	end
+	if x > rightMediumCellXW then
+		print("Resize now side right")
+		destination = wm.screenPositions.halfRight
+	end
+	if x < ACTIVE_AREA then
+		print("Resize now side left")
+		destination = wm.screenPositions.halfLeft
 	end
 	if destination then
 		hs.timer.doAfter(0.1, function() wm.moveWindowToPosition(destination) end)
@@ -76,6 +101,7 @@ end)
 hs.grid.ui.textSize = 0
 
 leftHighlight, rightHighlight, centreHighlight, leftHighlightTop, rightHighlightTop, centreHighlightTop = nil
+leftSideHighlight, rightSideHighlight = nil
 gridShown = false
 
 local function getColor(t, maxAlpha)
@@ -116,16 +142,20 @@ function grid(show)
 	orange = {55, 203, 75, alpha}
 	magenta = {211,  54, 130, alpha}
 	cyan = {42, 161, 152, alpha}
-	orangeA = {55, 203, 75, alpha*factor}
+	greenA = {133, 153, 0, alpha*factor*2}
+	blueA = {38, 139, 210, alpha*factor*2}
+	orangeA = {203, 75, 22, alpha*factor}
 	magentaA = {211,  54, 130, alpha*factor}
 	cyanA = {42, 161, 152, alpha*factor}
 	if show then
 		leftHighlight = showHighlight(orange, leftMediumCell)
 		rightHighlight = showHighlight(cyan, rightMediumCell)
 		centreHighlight = showHighlight(magenta, centreMediumCell)
-		leftHighlightTop = showHighlight(orangeA, leftMediumCellTop, 0)
-		rightHighlightTop = showHighlight(cyanA, rightMediumCellTop, 0)
-		centreHighlightTop = showHighlight(magentaA, centreMediumCellTop, 0)
+		leftSideHighlight = showHighlight(blueA, halfLeftCell, 0)
+		rightSideHighlight = showHighlight(greenA, halfRightCell, 0)
+		--leftHighlightTop = showHighlight(orangeA, leftMediumCellTop, 0)
+		--rightHighlightTop = showHighlight(cyanA, rightMediumCellTop, 0)
+		--centreHighlightTop = showHighlight(magentaA, centreMediumCellTop, 0)
 		gridShown = true
 	else 
 		if leftHighlight then 
@@ -140,18 +170,27 @@ function grid(show)
 			centreHighlight:delete()
 			centreHighlight = nil
 		end
-		if leftHighlightTop then 
-			leftHighlightTop:delete() 
-			leftHighlightTop = nil
+		-- if leftHighlightTop then 
+		-- 	leftHighlightTop:delete() 
+		-- 	leftHighlightTop = nil
+		-- end
+		-- if rightHighlightTop then 
+		-- 	rightHighlightTop:delete() 
+		-- 	rightHighlightTop = nil
+		-- end
+		-- if centreHighlightTop then 
+		-- 	centreHighlightTop:delete() 
+		-- 	centreHighlightTop = nil
+		-- end
+		if leftSideHighlight then 
+			leftSideHighlight:delete() 
+			leftSideHighlight = nil
 		end
-		if rightHighlightTop then 
-			rightHighlightTop:delete() 
-			rightHighlightTop = nil
+		if rightSideHighlight then 
+			rightSideHighlight:delete() 
+			rightSideHighlight = nil
 		end
-		if centreHighlightTop then 
-			centreHighlightTop:delete() 
-			centreHighlightTop = nil
-		end
+
 		gridShown = false
 	end
 	

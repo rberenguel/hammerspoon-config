@@ -11,7 +11,7 @@ hs.window.animationDuration = 0
 
 local screenPositions       = {}
 screenPositions.halfLeft        = {x = 0,              y = 0,              w = HALF_GRID_SIZE, h = GRID_SIZE     }
-screenPositions.halfright       = {x = HALF_GRID_SIZE, y = 0,              w = HALF_GRID_SIZE, h = GRID_SIZE     }
+screenPositions.halfRight       = {x = HALF_GRID_SIZE, y = 0,              w = HALF_GRID_SIZE, h = GRID_SIZE     }
 screenPositions.halfTop         = {x = 0,              y = 0,              w = GRID_SIZE,      h = HALF_GRID_SIZE}
 screenPositions.halfBottom      = {x = 0,              y = HALF_GRID_SIZE, w = GRID_SIZE,      h = HALF_GRID_SIZE}
 
