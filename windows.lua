@@ -10,6 +10,7 @@ hs.grid.setMargins({2, 2})
 hs.window.animationDuration = 0
 
 local screenPositions       = {}
+screenPositions.fullScreen = {x = 0,              y = 0,              w = GRID_SIZE, h = GRID_SIZE     }
 screenPositions.halfLeft        = {x = 0,              y = 0,              w = HALF_GRID_SIZE, h = GRID_SIZE     }
 screenPositions.halfRight       = {x = HALF_GRID_SIZE, y = 0,              w = HALF_GRID_SIZE, h = GRID_SIZE     }
 screenPositions.halfTop         = {x = 0,              y = 0,              w = GRID_SIZE,      h = HALF_GRID_SIZE}

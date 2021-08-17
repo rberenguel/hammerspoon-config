@@ -6,7 +6,10 @@ window layouts rock, the lack of overlapping windows in Amethyst makes using it 
 To mimic more or less my Amethyst usage, I borrowed the window management from [this post](https://medium.com/@jhkuperus/window-management-with-hammerspoon-personal-productivity-c77adc436888) (code available [here](https://github.com/jhkuperus/dotfiles/blob/master/hammerspoon/window-management.lua)) and the code from this [move-resize snippet](https://gist.github.com/kizzx2/e542fa74b80b7563045a) to implement a partial snap-to-grid:
 
 - Start dragging a window, and press shift (briefly, it's modal). 
-- A coloured overlay of the active zones on the top and what space the window will take will show.
-- If you release the window "to the top active zone left" it will resize it to 4/16ths on the left, likewise on the right and if done in the middle area, to 8/16ths. 
+- A coloured overlay of the active zones will appear
+- The outer sides convert the window in a half-pane
+- The inner sides convert the window in 4/16ths of the screen (the overlayed area+the outer side) to either side
+- The center converts the window in a 8/16ths of the screen pane in the center
+- The center "target" maximises the window
 
-https://user-images.githubusercontent.com/2410938/129484911-0719123e-34e5-4c49-ad1c-a536072b104f.mp4
+
