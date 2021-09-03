@@ -17,9 +17,11 @@ screenPositions.halfTop         = {x = 0,              y = 0,              w = G
 screenPositions.halfBottom      = {x = 0,              y = HALF_GRID_SIZE, w = GRID_SIZE,      h = HALF_GRID_SIZE}
 
 screenPositions.mediumSideLeft       = {x = 0,              y = 0,              w = MEDIUM_SIDE_GRID_SIZE, h = GRID_SIZE     }
+screenPositions.enlargedLeft       = {x = 0,              y = 0,              w = GRID_SIZE-MEDIUM_SIDE_GRID_SIZE, h = GRID_SIZE     }
 screenPositions.mediumSideTopLeft       = {x = 0,              y = 0,              w = MEDIUM_SIDE_GRID_SIZE, h = GRID_SIZE/2     }
 screenPositions.mediumSideBottomLeft       = {x = 0,              y = GRID_SIZE/2,              w = MEDIUM_SIDE_GRID_SIZE, h = GRID_SIZE/2     }
 screenPositions.mediumSideRight       = {x = GRID_SIZE - MEDIUM_SIDE_GRID_SIZE,              y = 0,              w = MEDIUM_SIDE_GRID_SIZE, h = GRID_SIZE     }
+screenPositions.enlargedRight       = {x = MEDIUM_SIDE_GRID_SIZE,              y = 0,              w = GRID_SIZE-MEDIUM_SIDE_GRID_SIZE, h = GRID_SIZE     }
 screenPositions.mediumSideTopRight       = {x = GRID_SIZE - MEDIUM_SIDE_GRID_SIZE,              y = 0,              w = MEDIUM_SIDE_GRID_SIZE, h = GRID_SIZE/2     }
 screenPositions.mediumSideBottomRight       = {x = GRID_SIZE - MEDIUM_SIDE_GRID_SIZE,              y = GRID_SIZE/2,              w = MEDIUM_SIDE_GRID_SIZE, h = GRID_SIZE/2     }
 screenPositions.mediumCentre       = {x = MEDIUM_SIDE_GRID_SIZE,              y = 0,              w = GRID_SIZE - 2*MEDIUM_SIDE_GRID_SIZE, h = GRID_SIZE     }
