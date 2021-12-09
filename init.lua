@@ -54,6 +54,22 @@ hs.hotkey.bind(k, "space", function()
     wm.moveWindowToPosition(wm.screenPositions.mediumCentre)
 end)
 
+-- RightGIF magical spoon
+headers = {}
+headers['Content-Type'] = 'application/x-www-form-urlencoded'
+hs.hotkey.bind(k, "g", function()
+    hs.eventtap.keyStroke("cmd", "a")
+    hs.eventtap.keyStroke("cmd", "c")
+    search = hs.pasteboard.getContents()
+    hs.http.asyncPost("https://rightgif.com/search/web", "&text=" .. hs.http.encodeForQuery(search), headers, function(a, b, c)
+        print(b)
+        hs.pasteboard.setContents(hs.json.decode(b)['url'])
+        hs.eventtap.keyStroke("cmd", "v")
+        return
+    end)
+end)
+
+
 hs.hotkey.bind(k, 'd', function()
     -- get the focused window
     local win = hs.window.focusedWindow()
