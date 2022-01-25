@@ -1,9 +1,9 @@
 local This = {}
 
-local GRID_SIZE = 16
+local GRID_SIZE = 12
 local HALF_GRID_SIZE = GRID_SIZE / 2
 local MEDIUM_SIDE_GRID_SIZE = 4
-local LARGE_SIDE_GRID_SIZE = 5
+local LARGE_SIDE_GRID_SIZE = 8
 
 hs.grid.setGrid(GRID_SIZE .. 'x' .. GRID_SIZE)
 hs.grid.setMargins({2, 2})
@@ -28,7 +28,7 @@ screenPositions.mediumCentre       = {x = MEDIUM_SIDE_GRID_SIZE,              y 
 
 screenPositions.largeSideLeft       = {x = 0,              y = 0,              w = LARGE_SIDE_GRID_SIZE, h = GRID_SIZE     }
 screenPositions.largeSideRight       = {x = GRID_SIZE - LARGE_SIDE_GRID_SIZE,              y = 0,              w = LARGE_SIDE_GRID_SIZE, h = GRID_SIZE     }
-screenPositions.largeCentre       = {x = LARGE_SIDE_GRID_SIZE,              y = 0,              w = GRID_SIZE - 2*LARGE_SIDE_GRID_SIZE, h = GRID_SIZE     }
+screenPositions.largeCentre       = {x = 3,              y = 0,              w = 6, h = GRID_SIZE     }
 
 
 screenPositions.topLeftQuadrant     = {x = 0,              y = 0,              w = HALF_GRID_SIZE, h = HALF_GRID_SIZE}

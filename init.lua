@@ -1,5 +1,5 @@
 local wm = require('windows')
-local snappy = require('snappy')
+--local snappy = require('snappy')
 
 -- Stopped using Hyper so I can use the commands remotely from my iPad, I can't
 -- map Hyper there.
